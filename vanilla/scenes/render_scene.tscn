@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://c35wmhvra5wur"]
+
+[ext_resource type="PackedScene" uid="uid://6s6ucseswr6o" path="res://vanilla/scenes/world.tscn" id="1_t2nh1"]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+process_mode = 3
+offset_right = 1150.0
+offset_bottom = 1028.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+process_mode = 1
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+size = Vector2i(1152, 648)
+size_2d_override = Vector2i(576, 324)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewport" instance=ExtResource("1_t2nh1")]

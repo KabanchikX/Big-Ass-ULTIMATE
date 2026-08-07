@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://pjrfwyck33xu"]
+
+[ext_resource type="Script" uid="uid://blcomcfjc7phx" path="res://vanilla/scripts/projectiles/test_bullet.gd" id="1_ku2ni"]
+[ext_resource type="Texture2D" uid="uid://cora6d5eyuf8o" path="res://vanilla/sprites/projectiles/test_bullet.png" id="2_j6t0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3aac"]
+size = Vector2(16, 12)
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_ku2ni")
+base_damage = 0.5
+life_time = 1.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_j6t0j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e3aac")

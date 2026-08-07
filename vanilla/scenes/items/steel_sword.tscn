@@ -1,0 +1,343 @@
+[gd_scene load_steps=21 format=3 uid="uid://sjs82sp7vjql"]
+
+[ext_resource type="Script" uid="uid://crxkb8qiar11t" path="res://vanilla/scripts/items/weapon/steel_sword.gd" id="1_8a426"]
+[ext_resource type="Texture2D" uid="uid://byr0gg0udiw4r" path="res://vanilla/sprites/projectiles/steel_sword_slash.png" id="2_aqfb8"]
+[ext_resource type="Texture2D" uid="uid://gj4m6ngpsaxa" path="res://vanilla/sprites/nothing.png" id="3_t2ldk"]
+[ext_resource type="Texture2D" uid="uid://slmq54r68v2r" path="res://vanilla/sprites/items/steel_sword/steel_sword_weapon.png" id="4_2ppmx"]
+[ext_resource type="Texture2D" uid="uid://dgk0qu7id0cpe" path="res://vanilla/sprites/test_room/shot_particle.png" id="5_s6lah"]
+[ext_resource type="Script" uid="uid://dc2lgr1aa7v38" path="res://classes/shadow.gd" id="6_aqfb8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olh3n"]
+atlas = ExtResource("2_aqfb8")
+region = Rect2(0, 0, 153, 137)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqh2s"]
+atlas = ExtResource("2_aqfb8")
+region = Rect2(153, 0, 153, 137)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43isb"]
+atlas = ExtResource("2_aqfb8")
+region = Rect2(306, 0, 153, 137)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_43isb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olh3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqh2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43isb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t2ldk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="Curve" id="Curve_lqh2s"]
+_data = [Vector2(0, 0), 0.0, 5.2127795, 0, 0, Vector2(0.513986, 0.9844358), -0.21196961, -0.62319064, 0, 0, Vector2(0.9475524, 0.45525295), 0.9744009, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_43isb"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.2777778, 0.7063492)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yu61s"]
+size = Vector2(36.624, 57.48204)
+
+[sub_resource type="Animation" id="Animation_lqh2s"]
+resource_name = "RESET"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -22)]
+}
+
+[sub_resource type="Animation" id="Animation_olh3n"]
+resource_name = "block"
+length = 2.00001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(23.999996, 12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.19102606]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -22)]
+}
+
+[sub_resource type="Animation" id="Animation_43isb"]
+resource_name = "hidden"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.9778123]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2.0000005, -1.0000038)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2.5430715, 6.5869637)]
+}
+
+[sub_resource type="Animation" id="Animation_y514d"]
+resource_name = "idle"
+length = 2.00001
+loop_mode = 1
+step = 0.1
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [Vector2(-13, 9), Vector2(-13, 9), Vector2(-2, 8), Vector2(-2, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [1.7817023, 1.7817023, 1.2366985, 1.2366985]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -22)]
+}
+
+[sub_resource type="Animation" id="Animation_yu61s"]
+resource_name = "slash"
+length = 0.65
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03455779, 0.04, 0.12499997, 0.225),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [5.5660725, 5.5660725, 3.3077655, 3.2344587, 3.1898108]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03455779, 0.04, 0.12499997, 0.225),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(38, -26), Vector2(38, -26), Vector2(26, 21.000004), Vector2(15, 20.999998), Vector2(8.999999, 17.999998)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -22)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_43isb"]
+_data = {
+&"RESET": SubResource("Animation_lqh2s"),
+&"block": SubResource("Animation_olh3n"),
+&"hidden": SubResource("Animation_43isb"),
+&"idle": SubResource("Animation_y514d"),
+&"slash": SubResource("Animation_yu61s")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t2ldk"]
+radius = 9.0
+
+[node name="SteelSword" type="Node2D" node_paths=PackedStringArray("pickup_zone", "shadow")]
+script = ExtResource("1_8a426")
+pickup_zone = NodePath("Area2D")
+shadow = NodePath("Shadow")
+metadata/_custom_type_script = "uid://bbjdxancuyf6t"
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+position = Vector2(85, 0)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="ShootingPoint"]
+visible = false
+rotation = -0.0009818589
+sprite_frames = SubResource("SpriteFrames_43isb")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_2ppmx")
+offset = Vector2(0, -22)
+
+[node name="Particles" type="CPUParticles2D" parent="Sprite"]
+z_index = 4
+z_as_relative = false
+position = Vector2(2, -25)
+rotation = 1.582619
+emitting = false
+amount = 25
+texture = ExtResource("5_s6lah")
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(-8.675, 0)
+particle_flag_align_y = true
+gravity = Vector2(0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_lqh2s")
+color_ramp = SubResource("Gradient_43isb")
+
+[node name="Blockbox" type="Area2D" parent="Sprite"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Blockbox"]
+position = Vector2(5.1589947, -20.58554)
+scale = Vector2(1.0000011, 1.0000011)
+shape = SubResource("RectangleShape2D_yu61s")
+
+[node name="Hitbox" type="Area2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Hitbox"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_43isb")
+}
+playback_default_blend_time = 0.1
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, 17)
+shape = SubResource("CircleShape2D_t2ldk")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(3, 18)
+script = ExtResource("6_aqfb8")
+size = Vector2(20, 15)
+metadata/_custom_type_script = "uid://dc2lgr1aa7v38"

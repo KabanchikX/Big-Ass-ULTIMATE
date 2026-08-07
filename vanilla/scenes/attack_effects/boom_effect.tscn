@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://qwmp1omu04il"]
+
+[ext_resource type="Texture2D" uid="uid://bis8iyv3t3try" path="res://vanilla/sprites/items/golden_revolver/boom_effect.png" id="1_a4t6w"]
+[ext_resource type="Texture2D" uid="uid://gj4m6ngpsaxa" path="res://vanilla/sprites/nothing.png" id="2_thygk"]
+[ext_resource type="Script" uid="uid://cli286hpepu7n" path="res://vanilla/scripts/attack_effects/slash_attack_effect.gd" id="3_mwvie"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xukhr"]
+atlas = ExtResource("1_a4t6w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnpwl"]
+atlas = ExtResource("1_a4t6w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8kts"]
+atlas = ExtResource("1_a4t6w")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k1lp"]
+atlas = ExtResource("1_a4t6w")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q3efa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xukhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnpwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8kts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k1lp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_thygk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="BoomEffect" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_q3efa")
+frame = 4
+frame_progress = 1.0
+script = ExtResource("3_mwvie")
