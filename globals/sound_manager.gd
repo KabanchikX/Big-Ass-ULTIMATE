@@ -149,11 +149,11 @@ func play_music(with_fade : bool = true, stream : AudioStream = null) -> void:
 		
 		current_player = players_list.MUSIC;
 
-func play_player_with_protection(player : Node, stream : AudioStream) -> void:
+func play_player_with_protection(player : Node, stream : AudioStream, offset : float = 0.0) -> void:
 	for i in streams_played_at_this_frame.size():
 		if streams_played_at_this_frame[i] == stream: return;
 	streams_played_at_this_frame.push_back(stream);
-	player.play();
+	player.play(offset);
 func play_playback_with_protection(playback : AudioStreamPlayback, stream : AudioStream) -> void:
 	for i in streams_played_at_this_frame.size():
 		if streams_played_at_this_frame[i] == stream: return;

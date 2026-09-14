@@ -25,6 +25,10 @@ var boom_effect_pool : Array[AttackEffect] = [];
 
 var anus : float = 0.0;
 
+func _init() -> void:
+	id = 2;
+	mod_name = "vanilla";
+
 func _ready() -> void:
 	super._ready();
 	is_friendly = is_friendly;

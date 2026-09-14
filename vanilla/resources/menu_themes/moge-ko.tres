@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MenuTheme" load_steps=4 format=3 uid="uid://doq6w1qx24tmg"]
+
+[ext_resource type="Texture2D" uid="uid://babgn80cok5vv" path="res://vanilla/sprites/gui/pause_menu/themes_icons/theme_icon_moge-ko.png" id="1_eb6q4"]
+[ext_resource type="Script" uid="uid://07s0ofkgsten" path="res://classes/menu_theme.gd" id="3_sc21d"]
+[ext_resource type="AudioStream" uid="uid://bxalmrnonbdrk" path="res://vanilla/music/themes/Moge-Ko.mp3" id="4_gowh0"]
+
+[resource]
+script = ExtResource("3_sc21d")
+name = "Moge-ko"
+main_color = Color(1.772, 1.772, 1.059, 1)
+second_color = Color(1.041, 0.422, 0.291, 1)
+first_background_color = Color(0.3882353, 0.12156863, 0.105882354, 1)
+second_background_color = Color(0.5972047, 0.31488913, 0.2742936, 0.6627451)
+theme_music = ExtResource("4_gowh0")
+icon = ExtResource("1_eb6q4")
+metadata/_custom_type_script = "uid://07s0ofkgsten"

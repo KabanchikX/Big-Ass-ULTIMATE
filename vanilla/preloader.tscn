@@ -1,0 +1,18 @@
+[gd_scene load_steps=14 format=3 uid="uid://dit8uewltpgt1"]
+
+[ext_resource type="PackedScene" uid="uid://g1p5mce1u3f7" path="res://vanilla/scenes/projectiles/alternate_kokushibo_slash_phase1.tscn" id="1_xw1ac"]
+[ext_resource type="PackedScene" uid="uid://dlrs2f37caoa0" path="res://vanilla/scenes/projectiles/alternate_kokushibo_slash_phase2.tscn" id="2_tybf0"]
+[ext_resource type="PackedScene" uid="uid://ctq8y0rquqwuq" path="res://vanilla/scenes/projectiles/basic_kokushibo_slash_phase1.tscn" id="3_x3vvb"]
+[ext_resource type="PackedScene" uid="uid://upk6n8sofat" path="res://vanilla/scenes/projectiles/basic_kokushibo_slash_phase2.tscn" id="4_64s8j"]
+[ext_resource type="PackedScene" uid="uid://dgb44ubdgq38m" path="res://vanilla/scenes/items/candlestick.tscn" id="5_2s5oy"]
+[ext_resource type="PackedScene" uid="uid://dl7of5kopme7u" path="res://vanilla/scenes/items/golden_revolver.tscn" id="6_qekpm"]
+[ext_resource type="PackedScene" uid="uid://csnbu0k01bvu5" path="res://vanilla/scenes/projectiles/kokushibo_slash_phase1.tscn" id="7_7uup6"]
+[ext_resource type="PackedScene" uid="uid://bkxux175bokgg" path="res://vanilla/scenes/projectiles/kokushibo_slash_phase2.tscn" id="8_kvl4l"]
+[ext_resource type="PackedScene" uid="uid://dp4do3nh7a7fy" path="res://vanilla/scenes/items/kokushibo_sword.tscn" id="9_5cdl3"]
+[ext_resource type="PackedScene" uid="uid://sjs82sp7vjql" path="res://vanilla/scenes/items/steel_sword.tscn" id="10_a5gc8"]
+[ext_resource type="PackedScene" uid="uid://c3myiec57qsqh" path="res://vanilla/scenes/player.tscn" id="10_tybf0"]
+[ext_resource type="PackedScene" uid="uid://o5qugrfl0fb1" path="res://vanilla/scenes/projectiles/steel_sword_slash.tscn" id="11_n7nro"]
+[ext_resource type="PackedScene" uid="uid://pjrfwyck33xu" path="res://vanilla/scenes/projectiles/test_bullet.tscn" id="12_7vho1"]
+
+[node name="Preloader" type="ResourcePreloader"]
+resources = [PackedStringArray("alternate_kokushibo_slash_phase1", "alternate_kokushibo_slash_phase2", "basic_kokushibo_slash_phase1", "basic_kokushibo_slash_phase2", "candlestick", "golden_revolver", "kokushibo_slash_phase1", "kokushibo_slash_phase2", "kokushibo_sword", "player", "steel_sword", "steel_sword_slash", "test_bullet"), [ExtResource("1_xw1ac"), ExtResource("2_tybf0"), ExtResource("3_x3vvb"), ExtResource("4_64s8j"), ExtResource("5_2s5oy"), ExtResource("6_qekpm"), ExtResource("7_7uup6"), ExtResource("8_kvl4l"), ExtResource("9_5cdl3"), ExtResource("10_tybf0"), ExtResource("10_a5gc8"), ExtResource("11_n7nro"), ExtResource("12_7vho1")]]

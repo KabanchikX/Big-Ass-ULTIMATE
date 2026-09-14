@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://upk6n8sofat"]
+
+[ext_resource type="Script" uid="uid://bnjaory42uugt" path="res://vanilla/scripts/projectiles/basic_kokushibo_slash_phase1.gd" id="1_5f552"]
+[ext_resource type="Texture2D" uid="uid://bolttuvrfocdm" path="res://vanilla/sprites/items/kokushibo_sword/purple_moon.png" id="2_cyok1"]
+[ext_resource type="Texture2D" uid="uid://5x57ti2dd1pl" path="res://vanilla/sprites/items/kokushibo_sword/purple_moon_oreola.png" id="3_5vlcx"]
+[ext_resource type="Texture2D" uid="uid://ugmfx1c8asvb" path="res://vanilla/sprites/items/kokushibo_sword/moon_particle.png" id="3_cyok1"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p8fd2"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_5f552"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 360), 0.0, -760.8437, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ivn5"]
+radius = 159.0
+height = 388.0
+
+[node name="Projectile" type="Area2D"]
+top_level = true
+script = ExtResource("1_5f552")
+speed = 5000.0
+life_time = 1.2
+is_blockable = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(186, -1)
+texture = ExtResource("2_cyok1")
+
+[node name="Sprite2" type="Sprite2D" parent="Sprite"]
+show_behind_parent = true
+texture = ExtResource("3_5vlcx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_p8fd2")
+position = Vector2(187, 0)
+rotation = 1.5707964
+emitting = false
+amount = 25
+texture = ExtResource("3_cyok1")
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(161.73, 176.075)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_max = 2.0
+angle_curve = SubResource("Curve_5f552")
+anim_offset_max = 1.0
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(185, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_6ivn5")

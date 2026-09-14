@@ -6,6 +6,10 @@ extends Item;
 @onready var actual_light : GradientTexture2D = actual_light_node.texture;
 @onready var particles : CPUParticles2D = get_node("Particles");
 
+func _init():
+	id = 1;
+	mod_name = "vanilla";
+
 func _ready() -> void:
 	super._ready();
 	max_stack = 10;

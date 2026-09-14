@@ -1,12 +1,13 @@
 extends RefCounted;
 
-var mod_info : Dictionary = {
+const mod_info : Dictionary = {
 	"name" : "Vanilla",
 	"description" : "Original content",
 	"version" : "1.0.0",
+	"author" : "KabanchikX"
 }
 
-var mod_data : Dictionary = {
+const mod_data : Dictionary = {
 	"items": {
 		0: {
 			"name" : "Steel sword",
@@ -26,6 +27,12 @@ var mod_data : Dictionary = {
 			"rareness" : "vanilla.secret",
 			"description" : "\nDAAAAMN MAN!\nTHIS ONE IS REALLY BADASS"
 			},
+		3: {
+			"name" : "Kokushibo sword",
+			"technical_name" : "kokushibo_sword",
+			"rareness" : "vanilla.secret",
+			"description" : "\nDAAAAMN MAN!\nTHIS ONE IS REALLY BADASS"
+			},
 		},
 	"rareness_styles": {
 			"shit" : "[color=brown]%s[/color]\n",
@@ -40,5 +47,15 @@ var mod_data : Dictionary = {
 			"amazing" : "[aboba]\n",
 			"secret" : "[rainbow][shake level=6.0, rate=20.0]%s[/shake][/rainbow]\n",
 			"special" : "[aboba]\n",
-		}
+		},
+	"worlds": {
+		"test_place": {
+			"name":"Test Place",
+			"description":"Vanilla world for testing"
+			},
+		"main_menu": {
+			"name":"Main menu",
+			"description":"if you even see this, i did smth wrong probably"
+		},
+	}
 }

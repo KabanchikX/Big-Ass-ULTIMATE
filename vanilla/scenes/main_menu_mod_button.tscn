@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhw6paotbtl4h"]
+
+[ext_resource type="Script" uid="uid://dkt3oi57cbwm6" path="res://classes/buttons/main_menu_mod_button.gd" id="1_jelar"]
+[ext_resource type="Texture2D" uid="uid://5y3lfujs8v0w" path="res://vanilla/sprites/gui/main_menu/button_rect_unshadowed.png" id="2_g46qw"]
+[ext_resource type="Texture2D" uid="uid://cgvdmwpu3c8he" path="res://vanilla/sprites/gui/pause_menu/themes_icons/theme_icon_classic.png" id="3_er3ws"]
+[ext_resource type="LabelSettings" uid="uid://bbrfnrxyoiqaf" path="res://vanilla/resources/shadow_label_settings.tres" id="4_yb35n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wiy6e"]
+texture = ExtResource("2_g46qw")
+texture_margin_left = 6.0
+texture_margin_top = 5.0
+texture_margin_right = 6.0
+texture_margin_bottom = 5.0
+
+[node name="MainMenuButton" type="Control"]
+custom_minimum_size = Vector2(194.985, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 194.0
+offset_bottom = 50.0
+script = ExtResource("1_jelar")
+metadata/_custom_type_script = "uid://dkt3oi57cbwm6"
+
+[node name="MainPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(194.985, 50)
+layout_mode = 0
+offset_right = 194.985
+offset_bottom = 50.0
+pivot_offset = Vector2(0, 25)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_wiy6e")
+
+[node name="ModIconPanel" type="Panel" parent="MainPanel"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 45.0
+offset_bottom = 45.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_wiy6e")
+
+[node name="ModIcon" type="Sprite2D" parent="MainPanel/ModIconPanel"]
+position = Vector2(20, 20)
+texture = ExtResource("3_er3ws")
+
+[node name="Text" type="Label" parent="MainPanel"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 5.0
+offset_right = 191.0
+offset_bottom = 20.0
+label_settings = ExtResource("4_yb35n")
+autowrap_mode = 3

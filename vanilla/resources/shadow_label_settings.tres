@@ -7,4 +7,4 @@ line_spacing = 1.0
 font = ExtResource("1_b5xdt")
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
-shadow_color = Color(0, 0, 0, 0.59800005)
+shadow_color = Color(0, 0, 0, 0.59607846)

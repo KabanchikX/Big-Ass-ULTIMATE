@@ -23,7 +23,6 @@ signal blocked;
 signal hitted_someone(something : Node2D);
 
 func change_active_state(activate : bool = true, _global_position : Vector2 = Vector2.ZERO, _rotation_degrees : float = 0.0) -> void:
-	(activated if activate else deactivated).emit();
 	is_active = activate;
 	visible = activate;
 	set_process(activate);
@@ -36,9 +35,9 @@ func change_active_state(activate : bool = true, _global_position : Vector2 = Ve
 		is_blocked = false;
 		life_timer.start(life_time);
 		
-		var space_state := get_world_2d().direct_space_state
-		var query := PhysicsShapeQueryParameters2D.new()
-		
+		var space_state : PhysicsDirectSpaceState2D = get_world_2d().direct_space_state;
+		var query : PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new();
+
 		query.shape = collision_shape.shape;
 		query.transform = global_transform;
 		query.collision_mask = hitbox.collision_mask;
@@ -56,7 +55,8 @@ func change_active_state(activate : bool = true, _global_position : Vector2 = Ve
 					hitted_someone.emit(area.owner);
 					break;
 	else: life_timer.stop();
-
+	(activated if activate else deactivated).emit();
+	
 func _ready() -> void:
 	hitbox.collision_layer = 0;
 	hitbox.collision_mask = 0;
@@ -72,7 +72,6 @@ func _ready() -> void:
 	
 	life_timer = Timer.new();
 	life_timer.one_shot = true;
-	life_timer.autostart = true;
 	life_timer.wait_time = life_time;
 	life_timer.timeout.connect(change_active_state.bind(false));
 	add_child(life_timer);

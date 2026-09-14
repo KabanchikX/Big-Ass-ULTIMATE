@@ -20,6 +20,10 @@ var sound_player_playback : AudioStreamPlayback
 
 @onready var attack_effects_container : Node = Node.new();
 
+func _init() -> void:
+	id = 0;
+	mod_name = "vanilla";
+
 func _ready() -> void:
 	super._ready();
 	y_sort_enabled = true if master else false;
@@ -55,18 +59,18 @@ func play_sound(stream) -> void:
 		sound_player_playback.set_stream_pitch_scale(thingy, randf_range(0.95, 1.05));
 
 func _input(event: InputEvent) -> void:
-	if master == null: return;
-	if is_active:
-		if !master.is_busy:
-			if event.is_action_pressed("mouse_left") and !event.is_echo() and animation_player.current_animation == "idle":
-				slash();
-			
-			if event.is_action_pressed("f") and !event.is_echo():
-				if animation_player.current_animation != "block": block_hitbox.get_child(0).set_deferred("disabled", false);
-				animation_player.play("block");
-			if event.is_action_released("f") and animation_player.current_animation == "block":
-				block_hitbox.get_child(0).set_deferred("disabled", true);
-				animation_player.play("idle");
+	if !master: return;
+	if !master.is_in_group("Player") or master.is_stunned or master.state == master.states_list.DEAD or master.is_busy: return;
+	
+	if event.is_action_pressed("mouse_left") and !event.is_echo() and animation_player.current_animation == "idle":
+		slash();
+	
+	if event.is_action_pressed("f") and !event.is_echo():
+		if animation_player.current_animation != "block": block_hitbox.get_child(0).set_deferred("disabled", false);
+		animation_player.play("block");
+	if event.is_action_released("f") and animation_player.current_animation == "block":
+		block_hitbox.get_child(0).set_deferred("disabled", true);
+		animation_player.play("idle");
 		
 func slash() -> void:
 	if is_active:

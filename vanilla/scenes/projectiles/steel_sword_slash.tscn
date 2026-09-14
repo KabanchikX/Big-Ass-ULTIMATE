@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://o5qugrfl0fb1"]
 
-[ext_resource type="Script" uid="uid://dhi1vl2cjk08v" path="res://vanilla/scripts/projectiles/steel_sword_slash.gd" id="1_tawn8"]
+[ext_resource type="Script" uid="uid://dhi1vl2cjk08v" path="res://vanilla/scripts/projectiles/sword_slash.gd" id="1_tawn8"]
 [ext_resource type="Texture2D" uid="uid://byr0gg0udiw4r" path="res://vanilla/sprites/projectiles/steel_sword_slash.png" id="2_5qamc"]
 [ext_resource type="Texture2D" uid="uid://gj4m6ngpsaxa" path="res://vanilla/sprites/nothing.png" id="3_w65ww"]
 

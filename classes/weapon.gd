@@ -43,7 +43,7 @@ func load_attack_effects_pool(effect_scene : PackedScene, pool_size : int = 0, p
 
 func get_free_projectile_id(pool : Array[Projectile]) -> int:
 	for i in pool.size():
-		if pool[i].collision_shape.disabled: return i;
+		if pool[i].collision_shape.disabled and !pool[i].is_active: return i;
 	return -1;
 func get_free_attack_effect_id(pool : Array[AttackEffect]) -> int:
 	for i in pool.size():

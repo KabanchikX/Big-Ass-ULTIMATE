@@ -3,6 +3,7 @@ class_name GuiSlot;
 
 var item : Item: 
 	set(value):
+		if item == value: return;
 		var _old_item : Item = item;
 		if item:
 			if item.amount_changed.is_connected(on_item_amount_changed):
@@ -80,4 +81,3 @@ func _gui_input(event: InputEvent) -> void:
 	
 func _physics_process(_delta: float) -> void:
 	super._physics_process(_delta)
-	#if name == "Slot1": print(item);

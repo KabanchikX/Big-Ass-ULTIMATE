@@ -13,9 +13,8 @@ var is_hovered : bool = false :
 				if !is_hovered: hovered.emit();
 			else:
 				unhovered.emit();
-				if is_pressed:
-					is_hovered = false;
-					is_pressed = false;
+				is_hovered = false;
+				if is_pressed: is_pressed = false;
 			is_hovered = value;
 var is_pressed : bool = false :
 	set(value):

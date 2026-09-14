@@ -11,6 +11,9 @@ var shake_amplitude : float = 0.0;
 var shake_rotation : bool = false;
 var shake_offset : bool = false;
 
+var is_cinematic_zoom : bool = false;
+
+var cinematic_zoom_value : float = 1.0;
 var zoom_value : float = 1.0 :
 	set(value) : zoom_value = clampf(value, 0.1, 10.0);
 
@@ -29,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	if shake_rotation: rotation = deg_to_rad(randf_range(-shake_amplitude, shake_amplitude))/2.0;
 	else: rotation = 0.0;
 	
-	zoom = lerp(zoom, Vector2(zoom_value, zoom_value), delta*2.5);
+	zoom = lerp(zoom, Vector2.ONE * (zoom_value if !is_cinematic_zoom else cinematic_zoom_value), delta*2.5);
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("wheel"): zoom_value = 1.0;
