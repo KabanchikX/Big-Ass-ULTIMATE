@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqxge2vd7r5o4"]
-
-[ext_resource type="Script" uid="uid://dc2lgr1aa7v38" path="res://classes/shadow.gd" id="1_aub1u"]
-
-[node name="Shadow" type="Sprite2D"]
-show_behind_parent = true
-z_as_relative = false
-script = ExtResource("1_aub1u")
-metadata/_custom_type_script = "uid://dc2lgr1aa7v38"

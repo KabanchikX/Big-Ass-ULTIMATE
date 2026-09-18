@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3rkgu26ahefn"]
-
-[ext_resource type="PackedScene" uid="uid://c3myiec57qsqh" path="res://vanilla/scenes/player.tscn" id="1_jomab"]
-[ext_resource type="Script" uid="uid://ch8ijefj1uux3" path="res://vanilla/scripts/characters/shluha_bot.gd" id="2_ii6hh"]
-
-[node name="Player" instance=ExtResource("1_jomab")]
-script = ExtResource("2_ii6hh")
