@@ -1,12 +1,12 @@
 extends BasicButton;
-class_name MainMenuModButton;
+class_name MainMenuWorldButton;
 
-@onready var mod_text : Label = get_node("MainPanel/Text");
-@onready var mod_icon : Sprite2D = get_node("MainPanel/ModIconPanel/ModIcon");
+@onready var world_text : Label = get_node("MainPanel/Text");
+@onready var world_icon : Sprite2D = get_node("MainPanel/WorldIconPanel/WorldIcon");
 
-var mod_name : String = "";
+var world_name : String = "vanilla.test_place";
 
-@onready var mod_icon_panel : Panel = get_node("MainPanel/ModIconPanel");
+@onready var world_icon_panel : Panel = get_node("MainPanel/WorldIconPanel");
 @onready var main_panel : Panel = get_node("MainPanel");
 
 var panel_color : Color = Color.WHITE;
@@ -24,33 +24,15 @@ var second_scale_modifier : Vector2 = Vector2.ZERO;
 var first_self_modulate : Color = Color(0.0, 0.0, 0.0, 0.0);
 var second_self_modulate : Color = Color(0.0, 0.0, 0.0, 0.0);
 
-var is_mod_enabled : bool = false :
-	set(value):
-		is_mod_enabled = value;
-		panel_color = Color(1.483, 0.508, 0.465) if !value else Color(0.749, 1.406, 0.776);
-		mod_icon_panel.self_modulate = panel_color;
-		
-		if mod_name == "vanilla": return;
-		var mod_path : String = GlobalData.mods_list[mod_name]["full_path"];
-		if Settings.enabled_mods.has(mod_path) and !value:
-			for element in Settings.enabled_mods.count(mod_path): Settings.enabled_mods.erase(mod_path);
-		if value: Settings.enabled_mods.append(mod_path);
-		
 func _ready() -> void:
 	super._ready();
-	set_mod();
-	if mod_name != "vanilla":
-		hovered.connect(on_state_changed.bind("hovered"));
-		unhovered.connect(on_state_changed.bind("unhovered"));
-		
-		pressed.connect(on_state_changed.bind("pressed"));
-		unpressed.connect(on_state_changed.bind("unpressed"));
-		
-		var mod_path : String = GlobalData.mods_list[mod_name]["full_path"];
-		is_mod_enabled = Settings.enabled_mods.has(mod_path);
-		Settings.enabled_mods.erase(mod_path);
-		return;
-	is_mod_enabled = true;
+	set_world();
+	
+	hovered.connect(on_state_changed.bind("hovered"));
+	unhovered.connect(on_state_changed.bind("unhovered"));
+	
+	pressed.connect(on_state_changed.bind("pressed"));
+	unpressed.connect(on_state_changed.bind("unpressed"));
 		
 func _physics_process(_delta: float) -> void:
 	main_panel.scale = Vector2.ONE + first_scale_modifier + second_scale_modifier;
@@ -84,22 +66,25 @@ func on_state_changed(_state : String = "hovered") -> void:
 		"unpressed":
 			if is_hovered:
 				SoundManager.play_interface_sound(load("res://vanilla/sfx/buttons/gui/interface_button_unpressed.mp3"))
-				is_mod_enabled = !is_mod_enabled;
+				var world : World = GlobalData.get_world(world_name.split(".")[1], world_name.split(".")[0]);
+				if world: GameManager.world = world;
+				
 			color_tween2 = set_up_tween(self, color_tween2, "second_self_modulate", Color(0.0, 0.0, 0.0, 0.0), 0.3);
 			second_tween = set_up_tween(self, second_tween, "second_scale_modifier", Vector2.ZERO, 0.35);
 
-func set_mod() -> void:
-	if !GlobalData.mods_list.has(mod_name): return;
+func set_world() -> Error:
+	var _mod_name : String = world_name.split(".")[0];
+	var _world_name : String = world_name.split(".")[1];
 	
-	var mod_info : Dictionary = {};
-	mod_info.assign(GlobalData.mods_list[mod_name].duplicate());
+	if !GlobalData.data.has(_mod_name): return FAILED;
+	if !GlobalData.data[_mod_name].has("worlds"): return FAILED;
+	if !GlobalData.data[_mod_name]["worlds"].has(_world_name): return FAILED;
 	
-	if FileAccess.file_exists("res://"+mod_name+"/icon.png"): mod_icon.texture = load("res://"+mod_name+"/icon.png");
+	var world_info : Dictionary = GlobalData.data[_mod_name]["worlds"][_world_name].duplicate(true);
 	
 	var text : String = "";
-	text += mod_info["name"]+" ";
-	text += mod_info["version"]+"\n";
-	text += "by "+mod_info["author"]+"\n";
+	text += world_info["name"]+"\n";
+	text += "from "+_mod_name;
 	
-	mod_text.text = text;
-	
+	world_text.text = text;
+	return OK;

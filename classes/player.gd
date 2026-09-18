@@ -57,9 +57,9 @@ var current_slot : GuiSlot :
 		current_slot = value;
 		current_item = current_slot.item;
 
-signal shoted(projectile : Projectile);
-signal picked_up(item : Item);
-signal dropped(item : Item);
+#signal shoted(projectile : Projectile);
+#signal picked_up(item : Item);
+#signal dropped(item : Item);
 signal item_to_be_picked_up_changed(item : Item);
 
 func on_current_slot_item_changed(old_item : Item, new_item : Item) -> void:
@@ -92,9 +92,6 @@ func _physics_process(delta: float) -> void:
 	if stick_camera: camera.global_position = lerp(camera.global_position, lerp(position, target, 0.35), delta * 30.0);
 	
 	if state != states_list.DEAD and !is_stunned:
-		if Input.is_action_just_pressed("9"):
-			OS.create_process(OS.get_executable_path(), OS.get_cmdline_args())
-			get_tree().quit()
 		if Input.is_action_just_pressed("e"): pick_up_item();
 		if Input.is_action_just_pressed("["):
 			print(GlobalData.execute_command(self, "give_item", "vanilla", [0, "ass_and_cock_and_balls", 1]));

@@ -1,8 +1,6 @@
 extends BasicButton;
 class_name MainMenuButton;
 
-@export var translation_size : Dictionary[Settings.languages_list, Vector2];
-
 @onready var sprite : Sprite2D = get_node("Sprite2D");
 
 var color_tween : Tween;

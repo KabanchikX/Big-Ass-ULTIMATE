@@ -3,9 +3,10 @@ extends Node;
 var world : Node = null :
 	set(new_world):
 		if world == new_world or !main: return;
+		SoundManager.stop_players();
 		var old_world : World = world;
 		world = new_world;
-		if old_world: old_world.call_deferred("queue_free");
+		if old_world: old_world.queue_free();
 		if new_world: main.call_deferred("add_child", new_world);
 		world_changed.emit(old_world, new_world);
 var hitstop_time : float = 0.0 :

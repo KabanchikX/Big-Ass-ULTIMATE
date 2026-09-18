@@ -37,6 +37,8 @@ var themes_list : Array[MenuTheme];
 
 @onready var pause_menu_checkbox_play_theme_music_constantly : PauseMenuCheckbox = get_node("PauseMenu/PauseMenuCheckbox")
 
+@onready var pause_menu_button_exit : PauseMenuButton = get_node("PauseMenu/PauseMenuButtonExit");
+
 @onready var theme_icon : Sprite2D = get_node("PauseMenu/ThemeIcon");
 @onready var theme_label : Label = get_node("PauseMenu/ThemeName");
 
@@ -70,6 +72,7 @@ func _ready() -> void:
 	pause_menu_button_close.clicked.connect(on_pause_menu_button_close_clicked);
 	pause_menu_button_change_theme_forward.clicked.connect(on_pause_menu_button_theme_change_clicked.bind(true));
 	pause_menu_button_change_theme_backward.clicked.connect(on_pause_menu_button_theme_change_clicked.bind(false));
+	pause_menu_button_exit.clicked.connect(func(): GameManager.world = GlobalData.get_world("main_menu", "vanilla"));
 	
 	pause_menu_checkbox_play_theme_music_constantly.is_checkboxed = true if Settings.play_theme_music_as_main else false;
 	pause_menu_checkbox_play_theme_music_constantly.checkboxed.connect(func(): Settings.play_theme_music_as_main = true);
@@ -170,6 +173,7 @@ func on_right_mouse_slot_pressed(slot : GuiSlot) -> void:
 		
 	if slot.item == null:
 		if mouse_slot.item == null: return;
+		
 		if mouse_slot.item.amount <= 1:
 			switch_items(slot, mouse_slot);
 		else:
@@ -178,11 +182,12 @@ func on_right_mouse_slot_pressed(slot : GuiSlot) -> void:
 		slot_hovered(slot);
 		return;
 		
-	if slot.item.scene_file_path == mouse_slot.item.scene_file_path:
-		if slot.item.amount < slot.item.max_stack:
-			if mouse_slot.item.amount <= 1: mouse_slot.item.queue_free();
-			else: mouse_slot.item.amount -= 1;
-			slot.item.amount += 1;
+	if slot.item.scene_file_path == mouse_slot.item.scene_file_path and slot.item.amount < slot.item.max_stack:
+		if mouse_slot.item.amount <= 1:
+			mouse_slot.item.queue_free();
+			return;
+		mouse_slot.item.amount -= 1;
+		slot.item.amount += 1;
 	
 func switch_items(slot1 : GuiSlot, slot2 : GuiSlot) -> void:
 	var old_item : Item = slot1.item;

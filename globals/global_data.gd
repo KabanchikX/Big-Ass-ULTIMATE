@@ -15,15 +15,9 @@ var id_by_technical_name_data : Dictionary = {};
 
 var mods_list : Dictionary = {};
 
-var worlds_list : Dictionary = {};
-
 var commands_containers : Dictionary[String, Node] = {}
 
 @onready var commands_container_for_commands_containers : Node = Node.new();
-
-signal mods_loaded;
-signal vanilla_loaded;
-signal enabled_mods_loaded;
 
 func _ready() -> void:
 	add_child(commands_container_for_commands_containers);
@@ -31,13 +25,22 @@ func _ready() -> void:
 	load_mods();
 	SaveLoad.load_settings();
 	load_enabled_mods();
-	
+
+#func _physics_process(_delta: float) -> void:
+	#if Input.is_action_just_pressed("0"):
+		#OS.create_process(OS.get_executable_path(), OS.get_cmdline_args())
+		#get_tree().quit()
+
 func load_vanilla() -> void:
 	var path : String = "res://vanilla/";
 	
 	var mod_data_file : GDScript = load(path + "data.gd");
-	mods_list["vanilla"] = mod_data_file.mod_info;
+	
+	mods_list["vanilla"] = mod_data_file.mod_info.duplicate();
 	data["vanilla"] = mod_data_file.mod_data;
+	var is_ok : bool = ResourceLoader.exists("res://vanilla/icon.png")
+	mods_list["vanilla"]["full_path"] = "res://vanilla";
+	mods_list["vanilla"]["icon"] = load("res://vanilla/icon.png") if is_ok else null;
 	
 	var new_command_container : CommandContainer = load(path + "commands.gd").new();
 	commands_containers["vanilla"] = new_command_container;
@@ -55,8 +58,7 @@ func load_vanilla() -> void:
 	for id in data["vanilla"]["items"]:
 		id_by_name_data["vanilla"][data["vanilla"]["items"][id]["name"]] = id;
 		id_by_technical_name_data["vanilla"][data["vanilla"]["items"][id]["technical_name"]] = id;
-	vanilla_loaded.emit();
-
+	
 func load_mods() -> void:
 	var mods_dir_path: String = "user://mods";
 	
@@ -76,13 +78,13 @@ func load_mods() -> void:
 					var data_file : GDScript = load_script_from_zip(full_pck_path, fl[0]+"/data.gd");
 					var data_dictionary : Dictionary = get_data_dictionary(data_file).duplicate();
 					data_dictionary.merge({"full_path" : full_pck_path});
+					data_dictionary.merge({"icon" : load_image_from_zip(full_pck_path, fl[0]+".icon.png")});
 					mods_list[fl[0]] = data_dictionary;
 					
 				else: print("this bro is doin som shit")
 				
 			file_name = dir.get_next();
 		dir.list_dir_end();
-	mods_loaded.emit();
 
 func get_data_dictionary(script : GDScript) -> Dictionary:
 	if !"mod_info" in script: return {};
@@ -160,14 +162,30 @@ func get_world(_name : String = "test_place", mod_name : String = "vanilla") -> 
 		var new_world : World = load("res://" + mod_name + "/scenes/worlds/" + _name + ".tscn").instantiate();
 		return new_world;
 	return null;
+
+func load_image_from_zip(zip_path: String, path_to_icon: String) -> ImageTexture:
+	var reader : ZIPReader = ZIPReader.new();
+	var error : Error = reader.open(zip_path);
+	if error != OK: return null;
+	
+	var buffer : PackedByteArray = reader.read_file(path_to_icon);
+	reader.close();
+	if buffer.is_empty(): return null;
+	
+	var image : Image = Image.new();
+	var image_error : Error = image.load_png_from_buffer(buffer);
+	if image_error != OK: return null;
+	
+	var texture : Texture = ImageTexture.create_from_image(image);
+	return texture;
 	
 func load_script_from_zip(zip_path: String, script_inside_zip: String) -> GDScript:
-	var reader := ZIPReader.new();
-	var error := reader.open(zip_path);
+	var reader : ZIPReader = ZIPReader.new();
+	var error : Error = reader.open(zip_path);
 	
 	if error != OK: return null;
 	
-	var buffer := reader.read_file(script_inside_zip);
+	var buffer : PackedByteArray = reader.read_file(script_inside_zip);
 	reader.close();
 	
 	if buffer.is_empty(): return null;

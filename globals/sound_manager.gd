@@ -71,6 +71,11 @@ func play_interface_sound(stream : AudioStream) -> void:
 		#interface_playback.play_stream(stream);
 		
 
+func stop_players() -> void:
+	main_music_player.stop();
+	music_player.stop();
+	theme_music_player.stop();
+
 func fade_players(player : AudioStreamPlayer) -> void:
 	if player_tween: player_tween.kill();
 	player_tween = create_tween();
